@@ -28,7 +28,7 @@
     recognition.onstart = () => {
       console.log('on start')
       try {
-        Android?.notify('listening');
+        window.Android?.notify('listening');
       } catch (e) {
 
       }
@@ -36,7 +36,7 @@
     recognition.onerror = (e) => {
       console.log(e);
       try {
-        Android?.notify('error:' + e.error);
+        window.Android?.notify('error:' + e.error);
       } catch (e) {
 
       }
@@ -44,7 +44,7 @@
     recognition.onend = () => {
       console.log('on-end')
       try {
-        Android?.notify('ended');
+        window.Android?.notify('ended');
       } catch (e) {
 
       }
@@ -55,7 +55,7 @@
       document.getElementById('transcript').innerText=event.results[last][0].transcript +'|'+ event.results[0].isFinal
       const transcript = event.results[last][0].transcript;
       try{
-        Android?.onPartialResult(transcript);
+        window.Android?.onPartialResult(transcript);
       }catch (e) {
 
       }
