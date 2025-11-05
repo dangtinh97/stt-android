@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="transcript"></div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      try{
+        Android?.notify('error:not_support');
+      }catch (e) {
+
+      }
+      return;
+    }
+    const recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.lang = 'vi-VN';
+    recognition.interimResults = true;
+    recognition.maxAlternatives = 1;
+    recognition.onstart = () => {
+      console.log('on start')
+      try {
+        Android?.notify('listening');
+      } catch (e) {
+
+      }
+    };
+    recognition.onerror = (e) => {
+      console.log(e);
+      try {
+        Android?.notify('error:' + e.error);
+      } catch (e) {
+
+      }
+    };
+    recognition.onend = () => {
+      console.log('on-end')
+      try {
+        Android?.notify('ended');
+      } catch (e) {
+
+      }
+    };
+    recognition.onresult = (event) => {
+      console.log(event.results)
+      console.log(event.results[0][0].transcript, event.results[0].isFinal);
+      document.getElementById('transcript').innerText=event.results[0][0].transcript +'|'+ event.results[0].isFinal
+      try{
+        Android?.onFinalResult('1221');
+      }catch (e) {
+
+      }
+    };
+
+    recognition.start();
+  });
+</script>
+</body>
+</html>
