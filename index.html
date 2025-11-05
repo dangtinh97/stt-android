@@ -55,7 +55,7 @@
       document.getElementById('transcript').innerText=event.results[last][0].transcript +'|'+ event.results[0].isFinal
       const transcript = event.results[last][0].transcript;
       try{
-        Android?.onFinalResult(transcript);
+        Android?.onPartialResult(transcript);
       }catch (e) {
 
       }
