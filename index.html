@@ -12,6 +12,8 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let timeoutClient = null;
+    let textTranscript = null;
     if (!SpeechRecognition) {
       try{
         Android?.notify('error:not_support');
@@ -26,7 +28,6 @@
     recognition.interimResults = true;
     recognition.maxAlternatives = 1;
     recognition.onstart = () => {
-      console.log('on start')
       try {
         window.Android?.notify('listening');
       } catch (e) {
@@ -54,6 +55,14 @@
       console.log(event.results[0][0].transcript, event.results[last].isFinal);
       document.getElementById('transcript').innerText=event.results[last][0].transcript +'|'+ event.results[0].isFinal
       const transcript = event.results[last][0].transcript;
+      textTranscript = transcript;
+      if(timeoutClient){
+        clearTimeout(timeoutClient)
+      }
+      timeoutClient = setTimeout(()=>{
+        window.Android?.onFinalResult(textTranscript);
+        recognition.stop()
+      },2000)
       try{
         window.Android?.onPartialResult(transcript);
       }catch (e) {
