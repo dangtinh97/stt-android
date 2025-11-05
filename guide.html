@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Hướng dẫn sử dụng Emo</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#7c3aed;--muted:#94a3b8;--glass:rgba(255,255,255,0.03)}
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
+    body{background:linear-gradient(180deg,#071021 0%, #061226 60%);color:#e6eef8;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;padding:18px}
+    .container{max-width:980px;margin:0 auto}
+    header{display:flex;gap:12px;align-items:center;margin-bottom:18px}
+    .logo{width:70px;height:70px;border-radius:16px;background:linear-gradient(135deg,var(--accent),#0ea5a4);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(124,58,237,0.18)}
+    .logo svg{width:46px;height:46px}
+    h1{font-size:20px;margin:0}
+    p.lead{margin:2px 0 0;color:var(--muted);font-size:13px}
+
+    main{display:grid;grid-template-columns:1fr;gap:14px}
+    @media(min-width:880px){main{grid-template-columns:360px 1fr}}
+
+    .card{background:linear-gradient(180deg,var(--card),rgba(11,18,32,0.85));padding:14px;border-radius:14px;box-shadow:0 6px 20px rgba(2,6,23,0.6)}
+    .commands{display:grid;gap:10px}
+    .cmd{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.03)}
+    .cmd .label{font-weight:600}
+    .examples{color:var(--muted);font-size:13px;margin-top:6px}
+    .btn{border:0;padding:8px 12px;border-radius:10px;background:linear-gradient(90deg,var(--accent),#06b6d4);color:white;font-weight:600;cursor:pointer}
+
+    /* Face demo */
+    .face-wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
+    .face{width:180px;height:180px;border-radius:20px;background:linear-gradient(180deg,#0b1220,#071227);display:flex;align-items:center;justify-content:center;position:relative;touch-action:none}
+    .eye{width:18px;height:18px;border-radius:50%;background:#fff;position:absolute;top:64px}
+    .eye.left{left:58px}
+    .eye.right{right:58px}
+    .mouth{position:absolute;bottom:44px;height:22px;width:80px;border-radius:40px;background:#fff;transform-origin:center;transition:transform .18s ease,opacity .12s}
+    .mouth.happy{transform:translateY(2px) scaleY(0.45) rotate(0deg)}
+    .mouth.neutral{transform:scaleY(0.18)}
+    .mouth.angry{transform:translateY(6px) scaleY(0.12) rotate(6deg);background:#ffb4b4}
+
+    .hint{font-size:13px;color:var(--muted);text-align:center}
+
+    /* Sections */
+    .section-title{font-weight:700;margin-bottom:6px}
+    .settings-list{display:grid;gap:8px}
+    .setting{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:10px;background:rgba(255,255,255,0.02)}
+    .toggle{width:46px;height:26px;border-radius:20px;background:rgba(255,255,255,0.06);position:relative;cursor:pointer}
+    .toggle .dot{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:white;transition:transform .18s}
+    .toggle.on{background:linear-gradient(90deg,var(--accent),#06b6d4)}
+    .copy{background:transparent;border:1px dashed rgba(255,255,255,0.06);padding:6px 10px;border-radius:8px;color:var(--muted);font-size:13px}
+
+    footer{color:var(--muted);font-size:13px;text-align:center;margin-top:12px}
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="logo" aria-hidden>
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C7.03 2 3 6.03 3 11c0 2.49 1.02 4.75 2.67 6.36L6 21l3.77-1.31A8.96 8.96 0 0012 20c4.97 0 9-4.03 9-9s-4.03-9-9-9z" fill="white" opacity="0.12"/><path d="M12 4c3.86 0 7 3.14 7 7s-3.14 7-7 7c-.9 0-1.76-.15-2.55-.43L7 20l-.78-1.7A7.001 7.001 0 0112 4z" fill="white"/></svg>
+    </div>
+    <div>
+      <h1>Hướng dẫn nhanh — Emo</h1>
+      <p class="lead">Các lệnh chính, thao tác cảm ứng và tùy chỉnh. Dễ, rõ, chạy trên mobile.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div>
+          <div class="section-title">Giao tiếp bằng giọng nói</div>
+          <div class="hint">Nói câu kích hoạt rồi dùng lệnh sau</div>
+        </div>
+      </div>
+
+      <div class="commands">
+        <div class="cmd">
+          <div>
+            <div class="label">Kích hoạt</div>
+            <div class="examples">"Hey Emo"</div>
+          </div>
+        </div>
+
+        <div class="cmd">
+          <div>
+            <div class="label">Mở bài hát</div>
+            <div class="examples">"Mở bài hát {tên bài hát}"</div>
+          </div>
+        </div>
+
+        <div class="cmd">
+          <div>
+            <div class="label">Đọc báo</div>
+            <div class="examples">"Đọc tin tức về {Kinh tế|Chính trị|Xã hội ...}"</div>
+          </div>
+        </div>
+
+        <div class="cmd">
+          <div>
+            <div class="label">Ghi chép chi tiêu</div>
+            <div class="examples">"Ghi cho tôi chi tiêu {nội dung chi tiêu}"</div>
+          </div>
+        </div>
+
+        <div class="cmd">
+          <div>
+            <div class="label">Tra giá vàng</div>
+            <div class="examples">"Giá vàng ngày hôm nay"</div>
+          </div>
+        </div>
+
+        <div class="cmd">
+          <div>
+            <div class="label">Thời tiết</div>
+            <div class="examples">"Tình hình thời tiết {Khu vực}"</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="card">
+      <div class="face-wrap">
+        <div class="section-title">Tương tác cảm ứng trên khuôn mặt Emo</div>
+        <div class="hint">Vuốt để làm Emo vui — Chạm nhanh 3 lần để làm Emo tức giận</div>
+
+        <div id="face" class="face" aria-label="Khuôn mặt Emo" role="img">
+          <div class="eye left"></div>
+          <div class="eye right"></div>
+          <div id="mouth" class="mouth neutral"></div>
+        </div>
+
+        <div class="hint">Thử vuốt trên khuôn mặt (swipe) hoặc chạm 3 lần nhanh.</div>
+        <div id="feedback" class="hint"></div>
+      </div>
+
+      <hr style="opacity:.06;margin:12px 0">
+      <div>
+        <div class="section-title">Lưu ý khi tính năng không hoạt động</div>
+        <div style="margin-top:8px;color:var(--muted);font-size:14px">
+          <strong>Nhận diện giọng nói không hoạt động:</strong> Vào <em>Cài đặt → Nhận diện giọng nói</em> rồi tắt "Nhận diện giọng nói mặc định".
+          <br><br>
+          <strong>Nói tiếng Việt không chuẩn:</strong> Vào <em>Cài đặt → Giọng nói</em> rồi tắt "Giọng nói mặc định".
+
+          <br><br>
+          <strong>Thoát ứng dụng và mở lại để khởi động lại toàn bộ tính năng.</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div style="display: none">
+        <div class="section-title">Cài đặt nhanh</div>
+        <div class="settings-list" style="margin-top:10px">
+          <div class="setting">
+            <div>
+              <div style="font-weight:700">Nhận diện giọng nói mặc định</div>
+              <div style="font-size:13px;color:var(--muted)">Tắt nếu thiết bị không nhận diện được tiếng nói</div>
+            </div>
+            <div class="toggle" id="tog-recog"><div class="dot"></div></div>
+          </div>
+
+          <div class="setting">
+            <div>
+              <div style="font-weight:700">Giọng nói mặc định</div>
+              <div style="font-size:13px;color:var(--muted)">Tắt để thay bằng bộ giọng Việt khác</div>
+            </div>
+            <div class="toggle" id="tog-voice"><div class="dot"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <hr style="opacity:.06;margin:12px 0">
+      <div>
+        <div class="section-title">Mẹo vận hành</div>
+        <ul style="color:var(--muted);padding-left:18px;margin:6px 0 0">
+          <li>Nói câu kích hoạt rõ ràng: "Hey Emo" → chờ 0.5s rồi nói lệnh.</li>
+          <li>Đảm bảo micro được cấp quyền cho ứng dụng.</li>
+          <li>Sau 5s không thấy âm thanh emo sẽ tự dừng.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  <footer>
+    Emo — trợ lý cảm xúc thông minh, luôn lắng nghe và đồng hành cùng bạn.
+  </footer>
+</div>
+
+<script>
+  // Copy buttons
+  document.querySelectorAll('.copy').forEach(btn=>btn.addEventListener('click',()=>{
+    const t = btn.getAttribute('data-text')||btn.textContent
+    navigator.clipboard?.writeText(t).then(()=>{
+      btn.textContent='Đã sao chép'
+      setTimeout(()=>btn.textContent='Sao chép',900)
+    }).catch(()=>{ alert('Không thể sao chép. Dùng tay giữ để sao chép.') })
+  }))
+
+  // Toggles (visual only)
+  function setupToggle(id){
+    const el = document.getElementById(id)
+    let on=false
+    el.addEventListener('click',()=>{
+      on=!on
+      el.classList.toggle('on',on)
+      el.querySelector('.dot').style.transform = on? 'translateX(20px)':'translateX(0)'
+    })
+  }
+  setupToggle('tog-recog');setupToggle('tog-voice')
+
+  // Face interactions: detect swipe -> happy, triple tap -> angry
+  const face = document.getElementById('face')
+  const mouth = document.getElementById('mouth')
+  const feedback = document.getElementById('feedback')
+
+  // Triple tap detection
+  let taps=[]
+  face.addEventListener('pointerdown', (e)=>{
+    const now = Date.now()
+    taps = taps.filter(t => now - t < 700)
+    taps.push(now)
+    if(taps.length>=3){
+      setAngry()
+      taps=[]
+    }
+  })
+
+  // Swipe detection
+  let sx=0, sy=0
+  face.addEventListener('pointerdown', e=>{sx=e.clientX; sy=e.clientY; face.setPointerCapture(e.pointerId)})
+  face.addEventListener('pointerup', e=>{
+    const dx = e.clientX - sx
+    const dy = e.clientY - sy
+    const adx = Math.abs(dx), ady = Math.abs(dy)
+    if(Math.max(adx,ady) > 30){
+      setHappy()
+    }
+  })
+
+  function setHappy(){
+    mouth.className='mouth happy'
+    feedback.textContent='Emo vui — bạn vuốt mặt.'
+    setTimeout(()=>{mouth.className='mouth neutral';feedback.textContent=''},1200)
+  }
+  function setAngry(){
+    mouth.className='mouth angry'
+    feedback.textContent='Emo tức giận — bạn chạm 3 lần.'
+    setTimeout(()=>{mouth.className='mouth neutral';feedback.textContent=''},1400)
+  }
+
+  // Accessibility: keyboard controls for testing
+  face.tabIndex=0
+  face.addEventListener('keydown',(e)=>{
+    if(e.key==='h'){setHappy()}
+    if(e.key==='a'){setAngry()}
+  })
+</script>
+</body>
+</html>
