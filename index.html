@@ -13,6 +13,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     let timeoutClient = null;
+    let timeoutNoSpeech = null;
     let textTranscript = null;
     if (!SpeechRecognition) {
       try{
@@ -29,6 +30,10 @@
     recognition.maxAlternatives = 1;
     recognition.onstart = () => {
       try {
+        timeoutNoSpeech = setTimeout(()=>{
+          recognition.stop()
+          window.Android?.notify('no-speech');
+        },5000)
         window.Android?.notify('listening');
       } catch (e) {
 
@@ -56,6 +61,9 @@
       document.getElementById('transcript').innerText=event.results[last][0].transcript +'|'+ event.results[0].isFinal
       const transcript = event.results[last][0].transcript;
       textTranscript = transcript;
+      if(timeoutNoSpeech){
+        clearTimeout(timeoutNoSpeech)
+      }
       if(timeoutClient){
         clearTimeout(timeoutClient)
       }
