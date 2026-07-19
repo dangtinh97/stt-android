@@ -2,270 +2,451 @@
 <html lang="vi">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Hướng dẫn sử dụng Emo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Xiaozhi Device Setup Guide</title>
   <style>
-    :root{--bg:#0f1724;--card:#0b1220;--accent:#7c3aed;--muted:#94a3b8;--glass:rgba(255,255,255,0.03)}
-    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
-    body{background:linear-gradient(180deg,#071021 0%, #061226 60%);color:#e6eef8;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;padding:18px}
-    .container{max-width:980px;margin:0 auto}
-    header{display:flex;gap:12px;align-items:center;margin-bottom:18px}
-    .logo{width:70px;height:70px;border-radius:16px;background:linear-gradient(135deg,var(--accent),#0ea5a4);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(124,58,237,0.18)}
-    .logo img{width:70px;height:70px ; border-radius: 16px}
-    h1{font-size:20px;margin:0}
-    p.lead{margin:2px 0 0;color:var(--muted);font-size:13px}
+    :root {
+      color-scheme: dark;
+      --bg: #090b0f;
+      --panel: #141820;
+      --panel-2: #1b202a;
+      --text: #f6f8fb;
+      --muted: #aab2c0;
+      --line: #303744;
+      --blue: #5ba8ff;
+      --red: #ff3030;
+      --green: #5de28c;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
 
-    main{display:grid;grid-template-columns:1fr;gap:14px}
-    @media(min-width:880px){main{grid-template-columns:360px 1fr}}
+    * {
+      box-sizing: border-box;
+    }
 
-    .card{background:linear-gradient(180deg,var(--card),rgba(11,18,32,0.85));padding:14px;border-radius:14px;box-shadow:0 6px 20px rgba(2,6,23,0.6)}
-    .commands{display:grid;gap:10px}
-    .cmd{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.03)}
-    .cmd .label{font-weight:600}
-    .examples{color:var(--muted);font-size:13px;margin-top:6px}
-    .btn{border:0;padding:8px 12px;border-radius:10px;background:linear-gradient(90deg,var(--accent),#06b6d4);color:white;font-weight:600;cursor:pointer}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(91, 168, 255, 0.18), transparent 28rem),
+        linear-gradient(180deg, #0e1118 0%, var(--bg) 46%, #07080b 100%);
+      color: var(--text);
+    }
 
-    /* Face demo */
-    .face-wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
-    .face{width:180px;height:180px;border-radius:20px;background:linear-gradient(180deg,#0b1220,#071227);display:flex;align-items:center;justify-content:center;position:relative;touch-action:none}
-    .eye{width:18px;height:18px;border-radius:50%;background:#fff;position:absolute;top:64px}
-    .eye.left{left:58px}
-    .eye.right{right:58px}
-    .mouth{position:absolute;bottom:44px;height:22px;width:80px;border-radius:40px;background:#fff;transform-origin:center;transition:transform .18s ease,opacity .12s}
-    .mouth.happy{transform:translateY(2px) scaleY(0.45) rotate(0deg)}
-    .mouth.neutral{transform:scaleY(0.18)}
-    .mouth.angry{transform:translateY(6px) scaleY(0.12) rotate(6deg);background:#ffb4b4}
+    a {
+      color: inherit;
+    }
 
-    .hint{font-size:13px;color:var(--muted);text-align:center}
+    figure {
+      margin: 0;
+    }
 
-    /* Sections */
-    .section-title{font-weight:700;margin-bottom:6px}
-    .settings-list{display:grid;gap:8px}
-    .setting{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:10px;background:rgba(255,255,255,0.02)}
-    .toggle{width:46px;height:26px;border-radius:20px;background:rgba(255,255,255,0.06);position:relative;cursor:pointer}
-    .toggle .dot{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:white;transition:transform .18s}
-    .toggle.on{background:linear-gradient(90deg,var(--accent),#06b6d4)}
-    .copy{background:transparent;border:1px dashed rgba(255,255,255,0.06);padding:6px 10px;border-radius:8px;color:var(--muted);font-size:13px}
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 54px;
+    }
 
-    footer{color:var(--muted);font-size:13px;text-align:center;margin-top:12px}
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+      gap: 28px;
+      align-items: center;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(20, 24, 32, 0.82);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 740px;
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 18px 0 0;
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.65;
+    }
+
+    .tabs {
+      display: inline-grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      margin-top: 26px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #0d1016;
+    }
+
+    .tab-button {
+      border: 0;
+      border-radius: 6px;
+      padding: 11px 16px;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .tab-button[aria-selected="true"] {
+      background: var(--blue);
+      color: #06111f;
+    }
+
+    .activation-card {
+      justify-self: center;
+      width: min(270px, 100%);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #000;
+    }
+
+    .activation-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .steps {
+      display: grid;
+      gap: 24px;
+      margin-top: 28px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr);
+      gap: 24px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(20, 24, 32, 0.72);
+    }
+
+    .step-copy {
+      align-self: start;
+      position: sticky;
+      top: 18px;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 42px;
+      height: 42px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(91, 168, 255, 0.55);
+      border-radius: 8px;
+      background: rgba(91, 168, 255, 0.13);
+      color: #cfe6ff;
+      font-weight: 800;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 25px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .step-copy p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .image-frame {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #050607;
+    }
+
+    .image-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .image-frame.phone {
+      width: min(330px, 100%);
+      margin-inline: auto;
+    }
+
+    .image-pair {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+      gap: 16px;
+      align-items: center;
+    }
+
+    .add-device-marker {
+      display: none!important;
+      position: absolute;
+      left: 82.2%;
+      top: 63.8%;
+      width: 10.2%;
+      height: 33%;
+      border: max(3px, 0.22vw) solid var(--red);
+      border-radius: 999px;
+      transform: translate(-50%, -50%);
+      box-shadow:
+        0 0 0 4px rgba(255, 48, 48, 0.16),
+        0 0 22px rgba(255, 48, 48, 0.55);
+      pointer-events: none;
+    }
+
+    .add-device-marker::after {
+      content: "";
+      position: absolute;
+      right: -18%;
+      top: 55%;
+      width: 34%;
+      height: 3px;
+      background: var(--red);
+      transform: rotate(18deg);
+      transform-origin: left center;
+      border-radius: 999px;
+    }
+
+    .code-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+      padding: 12px 15px;
+      border: 1px solid rgba(91, 168, 255, 0.45);
+      border-radius: 8px;
+      background: #0e141e;
+      color: #dcecff;
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    .contact {
+      margin-top: 24px;
+      padding: 20px 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(20, 24, 32, 0.72);
+    }
+
+    .contact h2 {
+      font-size: 22px;
+    }
+
+    .contact p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      background: #1877f2;
+      color: #fff;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .contact-link::before {
+      content: "f";
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #fff;
+      color: #1877f2;
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    [data-lang] {
+      display: none;
+    }
+
+    body.lang-vi [data-lang="vi"],
+    body.lang-en [data-lang="en"] {
+      display: revert;
+    }
+
+    @media (max-width: 860px) {
+      .page {
+        width: min(100% - 22px, 680px);
+        padding-top: 18px;
+      }
+
+      .hero,
+      .step {
+        grid-template-columns: 1fr;
+        padding: 18px;
+      }
+
+      .activation-card {
+        width: min(230px, 100%);
+      }
+
+      .step-copy {
+        position: static;
+      }
+
+      .image-pair {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: clamp(32px, 10vw, 48px);
+      }
+
+      .lead {
+        font-size: 16px;
+      }
+    }
   </style>
 </head>
-<body>
-<div class="container">
-  <header>
-    <div class="logo" aria-hidden>
-      <img src="https://play-lh.googleusercontent.com/3uZZk1t3-lcX39IKrQXN8Qfz_yiYkq3keb3XB7PDbBbpkm9YwiN9r49WPtllXb-mcgAXBzGkfZcxANNbASdOEzw=w240-h480-rw">
-    </div>
-    <div>
-      <h1>Hướng dẫn nhanh — Emo</h1>
-      <p class="lead">Các lệnh chính, thao tác cảm ứng và tùy chỉnh. Dễ, rõ, chạy trên mobile.</p>
-    </div>
-  </header>
+<body class="lang-vi">
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="eyebrow" data-lang="vi">Hướng dẫn kết nối thiết bị</p>
+        <p class="eyebrow" data-lang="en">Device connection guide</p>
 
-  <main>
-    <section class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <div>
-          <div class="section-title">Giao tiếp bằng giọng nói</div>
-          <div class="hint">Nói câu kích hoạt rồi dùng lệnh sau</div>
+        <h1 data-lang="vi">Thêm thiết bị vào Xiaozhi Console</h1>
+        <h1 data-lang="en">Add your device to Xiaozhi Console</h1>
+
+        <p class="lead" data-lang="vi">
+          Làm theo 3 bước bên dưới để đăng nhập, bấm Add Device, sau đó nhập mã kích hoạt hiện trên màn hình thiết bị.
+        </p>
+        <p class="lead" data-lang="en">
+          Follow the 3 steps below to sign in, select Add Device, then enter the activation code shown on your device screen.
+        </p>
+
+        <div class="tabs" role="tablist" aria-label="Language">
+          <button class="tab-button" type="button" role="tab" aria-selected="true" data-set-lang="vi">Tiếng Việt</button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false" data-set-lang="en">English</button>
         </div>
       </div>
 
-      <div class="commands">
-        <div class="cmd">
-          <div>
-            <div class="label">Kích hoạt</div>
-            <div class="examples">"Hey Emo"</div>
-          </div>
-        </div>
-
-        <div class="cmd">
-          <div>
-            <div class="label">Mở bài hát</div>
-            <div class="examples">"Mở bài hát {tên bài hát}"</div>
-          </div>
-        </div>
-
-        <div class="cmd">
-          <div>
-            <div class="label">Mở video trên Youtube</div>
-            <div class="examples">"Mở video {nội dung} trên Youtube"</div>
-          </div>
-        </div>
-
-        <div class="cmd">
-          <div>
-            <div class="label">Đọc báo</div>
-            <div class="examples">"Đọc tin tức về {Kinh tế|Chính trị|Xã hội ...}"</div>
-          </div>
-        </div>
-
-        <div class="cmd">
-          <div>
-            <div class="label">Ghi chép chi tiêu</div>
-            <div class="examples">"Ghi cho tôi chi tiêu {nội dung chi tiêu}"</div>
-          </div>
-        </div>
-
-        <div class="cmd">
-          <div>
-            <div class="label">Tra giá vàng</div>
-            <div class="examples">"Giá vàng ngày hôm nay"</div>
-          </div>
-        </div>
-
-        <div class="cmd">
-          <div>
-            <div class="label">Thời tiết</div>
-            <div class="examples">"Tình hình thời tiết {Khu vực}"</div>
-          </div>
-        </div>
-
-        <div class="cmd">
-          <div>
-            <div class="label">Bật chế độ ngủ</div>
-            <div class="examples">"Đi ngủ" , "Bật chế độ ngủ"</div>
-          </div>
-        </div>
-      </div>
-
+      <figure class="activation-card">
+        <img src="activation-code.jpg" alt="Activation code on EmoDesk device screen">
+      </figure>
     </section>
 
-    <section class="card">
-      <div class="face-wrap">
-        <div class="section-title">Tương tác cảm ứng trên khuôn mặt Emo</div>
-        <div class="hint">Vuốt để làm Emo vui — Chạm nhanh 3 lần để làm Emo tức giận</div>
-
-        <div id="face" class="face" aria-label="Khuôn mặt Emo" role="img">
-          <div class="eye left"></div>
-          <div class="eye right"></div>
-          <div id="mouth" class="mouth neutral"></div>
+    <section class="steps" aria-label="Setup steps">
+      <article class="step">
+        <div class="step-copy">
+          <span class="step-number">1</span>
+          <h2 data-lang="vi">Đăng nhập vào Xiaozhi</h2>
+          <h2 data-lang="en">Sign in to Xiaozhi</h2>
+          <p data-lang="vi">
+            Mở <a href="https://xiaozhi.me/">https://xiaozhi.me/</a>, nhập thông tin đăng nhập của bạn, rồi vào Xiaozhi Console.
+          </p>
+          <p data-lang="en">
+            Open <a href="https://xiaozhi.me/">https://xiaozhi.me/</a>, enter your login details, then go to Xiaozhi Console.
+          </p>
         </div>
+        <figure class="image-frame">
+          <img src="login.jpg" alt="Xiaozhi Console login screen">
+        </figure>
+      </article>
 
-        <div class="hint">Thử vuốt trên khuôn mặt (swipe) hoặc chạm 3 lần nhanh.</div>
-        <div id="feedback" class="hint"></div>
-      </div>
-
-      <hr style="opacity:.06;margin:12px 0">
-      <div>
-        <div class="section-title">Lưu ý khi tính năng không hoạt động</div>
-        <div style="margin-top:8px;color:var(--muted);font-size:14px">
-          <strong>Nhận diện giọng nói không hoạt động:</strong> Vào <em>Cài đặt → Nhận diện giọng nói</em> rồi tắt "Nhận diện giọng nói mặc định".
-          <br><br>
-          <strong>Nói tiếng Việt không chuẩn:</strong> Vào <em>Cài đặt → Giọng nói</em> rồi tắt "Giọng nói mặc định".
-
-          <br><br>
-          <strong>Thoát ứng dụng và mở lại để khởi động lại toàn bộ tính năng.</strong>
+      <article class="step">
+        <div class="step-copy">
+          <span class="step-number">2</span>
+          <h2 data-lang="vi">Chọn Add Device</h2>
+          <h2 data-lang="en">Select Add Device</h2>
+          <p data-lang="vi">
+            Trong trang Agents, bấm nút Add Device được khoanh đỏ ở bên phải màn hình.
+          </p>
+          <p data-lang="en">
+            On the Agents page, click the Add Device button highlighted in red on the right side of the screen.
+          </p>
         </div>
-      </div>
+        <figure class="image-frame">
+          <img src="add-device.jpg" alt="Add Device button on Xiaozhi Console Agents page">
+          <span class="add-device-marker" aria-hidden="true"></span>
+        </figure>
+      </article>
+
+      <article class="step">
+        <div class="step-copy">
+          <span class="step-number">3</span>
+          <h2 data-lang="vi">Nhập mã kích hoạt</h2>
+          <h2 data-lang="en">Enter the activation code</h2>
+          <p data-lang="vi">
+            Lấy mã trên ảnh đầu tiên của thiết bị, nhập vào hộp mã trên website, sau đó hoàn tất kết nối.
+          </p>
+          <p data-lang="en">
+            Use the code from the first device image, enter it into the code field on the website, then finish pairing.
+          </p>
+          <div class="code-box" aria-label="Activation code">18785x</div>
+        </div>
+        <div class="image-pair">
+          <figure class="image-frame phone">
+            <img src="activation-code.jpg" alt="Activation code 18785x shown on device">
+          </figure>
+          <figure class="image-frame">
+            <img src="device-screen.jpg" alt="Device welcome and settings screen">
+          </figure>
+        </div>
+      </article>
     </section>
 
-    <section class="card">
-      <div style="display: none">
-        <div class="section-title">Cài đặt nhanh</div>
-        <div class="settings-list" style="margin-top:10px">
-          <div class="setting">
-            <div>
-              <div style="font-weight:700">Nhận diện giọng nói mặc định</div>
-              <div style="font-size:13px;color:var(--muted)">Tắt nếu thiết bị không nhận diện được tiếng nói</div>
-            </div>
-            <div class="toggle" id="tog-recog"><div class="dot"></div></div>
-          </div>
-
-          <div class="setting">
-            <div>
-              <div style="font-weight:700">Giọng nói mặc định</div>
-              <div style="font-size:13px;color:var(--muted)">Tắt để thay bằng bộ giọng Việt khác</div>
-            </div>
-            <div class="toggle" id="tog-voice"><div class="dot"></div></div>
-          </div>
-        </div>
-      </div>
-
-      <hr style="opacity:.06;margin:12px 0">
-      <div>
-        <div class="section-title">Mẹo vận hành</div>
-        <ul style="color:var(--muted);padding-left:18px;margin:6px 0 0">
-          <li>Nói câu kích hoạt rõ ràng: "Hey Emo" → chờ 0.5s rồi nói lệnh.</li>
-          <li>Đảm bảo micro được cấp quyền cho ứng dụng.</li>
-          <li>Sau 5s không thấy âm thanh emo sẽ tự dừng.</li>
-        </ul>
-      </div>
+    <section class="contact" aria-label="Contact">
+      <h2 data-lang="vi">Thông tin liên hệ</h2>
+      <h2 data-lang="en">Contact information</h2>
+      <p data-lang="vi">Nếu cần hỗ trợ thêm, bạn có thể liên hệ qua Facebook.</p>
+      <p data-lang="en">For more support, you can contact us on Facebook.</p>
+      <a class="contact-link" href="https://www.facebook.com/dangtinhhaui/" target="_blank" rel="noopener">
+        Facebook
+      </a>
     </section>
   </main>
-  <footer>
-    Emo — trợ lý cảm xúc thông minh, luôn lắng nghe và đồng hành cùng bạn.
-  </footer>
-</div>
 
-<script>
-  // Copy buttons
-  document.querySelectorAll('.copy').forEach(btn=>btn.addEventListener('click',()=>{
-    const t = btn.getAttribute('data-text')||btn.textContent
-    navigator.clipboard?.writeText(t).then(()=>{
-      btn.textContent='Đã sao chép'
-      setTimeout(()=>btn.textContent='Sao chép',900)
-    }).catch(()=>{ alert('Không thể sao chép. Dùng tay giữ để sao chép.') })
-  }))
+  <script>
+    const buttons = document.querySelectorAll("[data-set-lang]");
 
-  // Toggles (visual only)
-  function setupToggle(id){
-    const el = document.getElementById(id)
-    let on=false
-    el.addEventListener('click',()=>{
-      on=!on
-      el.classList.toggle('on',on)
-      el.querySelector('.dot').style.transform = on? 'translateX(20px)':'translateX(0)'
-    })
-  }
-  setupToggle('tog-recog');setupToggle('tog-voice')
-
-  // Face interactions: detect swipe -> happy, triple tap -> angry
-  const face = document.getElementById('face')
-  const mouth = document.getElementById('mouth')
-  const feedback = document.getElementById('feedback')
-
-  // Triple tap detection
-  let taps=[]
-  face.addEventListener('pointerdown', (e)=>{
-    const now = Date.now()
-    taps = taps.filter(t => now - t < 700)
-    taps.push(now)
-    if(taps.length>=3){
-      setAngry()
-      taps=[]
+    function setLanguage(lang) {
+      document.body.classList.toggle("lang-vi", lang === "vi");
+      document.body.classList.toggle("lang-en", lang === "en");
+      document.documentElement.lang = lang;
+      buttons.forEach((button) => {
+        button.setAttribute("aria-selected", String(button.dataset.setLang === lang));
+      });
     }
-  })
 
-  // Swipe detection
-  let sx=0, sy=0
-  face.addEventListener('pointerdown', e=>{sx=e.clientX; sy=e.clientY; face.setPointerCapture(e.pointerId)})
-  face.addEventListener('pointerup', e=>{
-    const dx = e.clientX - sx
-    const dy = e.clientY - sy
-    const adx = Math.abs(dx), ady = Math.abs(dy)
-    if(Math.max(adx,ady) > 30){
-      setHappy()
-    }
-  })
-
-  function setHappy(){
-    mouth.className='mouth happy'
-    feedback.textContent='Emo vui — bạn vuốt mặt.'
-    setTimeout(()=>{mouth.className='mouth neutral';feedback.textContent=''},1200)
-  }
-  function setAngry(){
-    mouth.className='mouth angry'
-    feedback.textContent='Emo tức giận — bạn chạm 3 lần.'
-    setTimeout(()=>{mouth.className='mouth neutral';feedback.textContent=''},1400)
-  }
-
-  // Accessibility: keyboard controls for testing
-  face.tabIndex=0
-  face.addEventListener('keydown',(e)=>{
-    if(e.key==='h'){setHappy()}
-    if(e.key==='a'){setAngry()}
-  })
-</script>
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => setLanguage(button.dataset.setLang));
+    });
+  </script>
 </body>
 </html>
